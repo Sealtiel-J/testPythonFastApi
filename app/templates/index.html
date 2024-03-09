@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple registration form</title>
+    <link href="favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <style>
+      .main-block {
+      max-width: 340px;
+      min-height: 460px;
+      padding: 10px 0;
+      margin: auto;
+      border-radius: 5px;
+      border: solid 1px #ccc;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.31);
+      background: #ebebeb;
+      }
+      form {
+      margin: 0 30px;
+      }
+      .account-type, .gender {
+      margin: 15px 0;
+      }
+      input[type=radio] {
+      display: none;
+      }
+      label#icon {
+      margin: 0;
+      border-radius: 5px 0 0 5px;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      padding-top: 4px;
+      margin-right: 20px;
+      text-indent: 30px;
+      overflow: visible;
+      cursor: pointer;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1c87c9;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 4px;
+      top: 8px;
+      left: 4px;
+      border: 3px solid #fff;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      input[type=text], input[type=password] {
+      width: calc(100% - 57px);
+      height: 36px;
+      margin: 13px 0 0 -5px;
+      padding-left: 10px;
+      border-radius: 0 5px 5px 0;
+      border: solid 1px #cbc9c9;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+      background: #fff;
+      }
+      input[type=password] {
+      margin-bottom: 15px;
+      }
+      #icon {
+      display: inline-block;
+      padding: 9.3px 15px;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09);
+      background: #1c87c9;
+      color: #fff;
+      text-align: center;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px;
+      border: none;
+      background: #1c87c9;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      }
+      button:hover {
+      background: #26a9e0;
+      }
+    </style>
+</head>
+<body>
+<section class="bg-black ">
+    <div class="container px-5 py-12 mx-auto lg:px-20">
+        <div class="flex flex-col flex-wrap pb-6 mb-12 text-white ">
+            <h1 class="mb-12 text-3xl font-medium text-white">
+                Recipes - Better than all the REST
+            </h1>
+            <p class="text-base leading-relaxed">
+                Latest recipes...</p>
+        </div>
+        {% for recipe in recipes %}
+        <div class="flex flex-wrap items-end justify-start w-full transition duration-500 ease-in-out transform bg-black border-2 border-gray-600 rounded-lg hover:border-white ">
+            <div class="w-full xl:w-1/4 md:w-1/4">
+                <div class="relative flex flex-col h-full p-8 ">
+                    <h2 class="mb-4 font-semibold tracking-widest text-white uppercase title-font">
+                        {{recipe.label}}
+                    </h2>
+                    <p class="flex items-center mb-2 text-lg font-normal tracking-wide text-white">
+                                <span
+                                        class="inline-flex items-center justify-center flex-shrink-0 w-5 h-5 mr-2 text-white rounded-full bg-blue-1300">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                         stroke-linejoin="round" stroke-width="2.5" class="w-4 h-4" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>{{recipe.source}}
+                    </p>
+                </div>
+            </div>
+            <div class="w-full xl:w-1/4 md:w-1/4 lg:ml-auto">
+                <div class="relative flex flex-col h-full p-8">
+                    <h1 class="flex items-end mx-auto text-3xl font-black leading-none text-white ">
+                        <span>View Recipe </span>
+                    </h1>
+                    <button
+                            class="w-full px-4 py-2 mx-auto mt-3 text-white transition duration-500 ease-in-out transform border border-gray-900 rounded-lg text-md hover:bg-gray-900 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 focus:border-gray-700 focus:bg-gray-800 ">
+                        <a href="{{recipe.url}}">Visit Site</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="main-block">
+    <h1 class="mb-12 text-3xl font-medium text-black">Recipe Registration</h1>
+    <form method="post" action="/form/{label}">
+
+        <label id="icon" for="label"><i class="fas fa-tag"></i></label>
+        <input type="text" name="label" id="label" placeholder="Label" required/>
+        <label id="icon" for="source"><i class="fas fa-archive"></i></label>
+        <input type="text" name="source" id="source" placeholder="Source" required/>
+        <label id="icon" for="url"><i class="fas fa-link"></i></label>
+        <input type="text" name="url" id="url" placeholder="URL" required/>
+        <div class="btn-block">
+            <p>By clicking Register, you agree on our <a href="https://www.w3docs.com/privacy-policy">Privacy Policy for
+                W3Docs</a>.</p>
+            <button type="submit" >Submit</button>
+        </div>
+    </form>
+</div>
+</section>
+</body>
+</html>

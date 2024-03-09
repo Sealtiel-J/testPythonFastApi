@@ -22,3 +22,5 @@ G
 database/db_postgres.py,2\6\26f58c3277573cb0e0a09fbe94cb95940735f536
 ;
 app/crud.py,d\d\dd330453c2264967b0514b84418f891fdc195918
+H
+app/templates/index.html,a\9\a9286b68ee697ecedf4dc538c397cb62f25f8ea6

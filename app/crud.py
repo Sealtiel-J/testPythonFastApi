@@ -7,6 +7,10 @@ def get_recipe(db: Session, recipeid: int):
     return db.query(mod.Recipe).filter(mod.Recipe.recipeid == recipeid).first()
 
 
+def get_all_recipes(db: Session):
+    return db.query(mod.Recipe).all()
+
+
 def get_recipe_by_label(db: Session, keyword: str):
     return db.query(mod.Recipe).filter(mod.Recipe.label.like(f'%{keyword}%')).all()
 

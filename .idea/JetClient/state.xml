@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JetClientState">
+    <option name="folders">
+      <list>
+        <folderState>
+          <option name="id" value="8e5ae5e2-b9ad-4d92-b145-f22c43398b4b" />
+          <option name="name" value="Python Recipe CRUD" />
+          <option name="requests">
+            <list>
+              <requestState>
+                <option name="description" value="Post to insert data to DB" />
+                <option name="id" value="c4201af1-aecc-489a-aa43-45cfdb58f64b" />
+                <option name="method" value="GET" />
+                <option name="name" value="Create Recipe" />
+                <option name="url" value="http://localhost:8001/docs" />
+              </requestState>
+            </list>
+          </option>
+          <option name="sortWeight" value="1000000" />
+          <option name="syncProperties">
+            <synchronizationPropertiesState>
+              <option name="folderPath" value="C:\Projects\Python\testPythonFastApi\.jetclient" />
+            </synchronizationPropertiesState>
+          </option>
+        </folderState>
+      </list>
+    </option>
+    <option name="id" value="10e9e73c-e234-4df3-8d62-f2af7e63c0ee" />
+  </component>
+</project>
