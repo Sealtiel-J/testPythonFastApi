@@ -24,3 +24,7 @@ G
 app/crud.py,d\d\dd330453c2264967b0514b84418f891fdc195918
 H
 app/templates/index.html,a\9\a9286b68ee697ecedf4dc538c397cb62f25f8ea6
+<
+app/utils.py,d\2\d2b046108d1c1b522dbbf815ff6124f053f98ac9
+>
+models/Auth.py,b\1\b131918935b46a8a3b1034676cbb699e30677bb8

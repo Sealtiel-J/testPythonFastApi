@@ -7,6 +7,9 @@
     <orderEntry type="jdk" jdkName="Python 3.12 (testPythonFastApi)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="removeUnused" value="true" />
+  </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="3c816616-e2d4-4313-8719-459374b62d24" />
   </component>

@@ -1,8 +1,7 @@
-import json
-from os import name
 from pathlib import Path as dirPath
-from typing import Optional
+from typing import Optional, Annotated
 from fastapi import APIRouter, Depends, HTTPException, Path, Request, Form
+from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from starlette.templating import Jinja2Templates
 
@@ -10,10 +9,12 @@ from database.db_postgres import SessionLocal
 import models.models as mod
 import models.recipe as schema
 import app.crud as crud
+import models.Auth as auth
 
 # mod.Base.metadata.create_all(bind=engine)
 BASE_PATH = dirPath(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str("templates"))
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 
 router = APIRouter()
 
@@ -34,22 +35,27 @@ async def page_main(request: Request, db: Session = Depends(get_db)):
     )
 
 
-@router.get('/', description='Hello world endpoint', tags=['Hello'])
-async def hello():
+@router.get("/users/me", description='Read user me', tags=['Auth'])
+async def read_users_me(current_user: Annotated[auth.User, Depends(auth.get_current_user)]):
+    return current_user
+
+
+@router.get('/hello', description='Hello world endpoint', tags=['Hello'])
+async def hello(token: Annotated[str, Depends(oauth2_scheme)]):
     return {'message': 'Hello World!'}
 
 
-@router.post('/form', )
-async def create_recipe(request: Request, label: str = Form(),
+@router.post('/form', response_model=schema.Recipe, description='Create a recipe from form', tags=['Recipe'])
+async def create_recipe(label: str = Form(),
                         source: str = Form(),
                         url: str = Form(),
                         db: Session = Depends(get_db)):
     db_recipe = schema.RecipeCreate(label=label, source=source, url=url)
-    recipe = db_recipe.model_dump()
+    recipe = crud.create_recipe(db, db_recipe)
     return recipe
 
 
-@router.get('/form/{label}')
+@router.get('/form/{label}', response_model=list[schema.Recipe])
 def get_form(db: Session = Depends(get_db), label: str = Path(description='food lable')):
     db_recipe = crud.search_recipe(db, keyword=label, max_results=10)
     if db_recipe is None:
